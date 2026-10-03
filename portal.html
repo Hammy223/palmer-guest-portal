@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Palmer Home</title>
+  <style>
+    :root {
+      --ink: #2a241c;
+      --pine: #243028;
+      --cream: #f7f3ec;
+      --muted: #7a7064;
+      --brass: #8d7344;
+      --line: rgba(42, 36, 28, 0.1);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      font-family: Georgia, "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+      color: var(--ink);
+      background: #cfc6b8 url("/static/porch.jpg") center/cover no-repeat fixed;
+      min-height: 100vh;
+      min-height: 100dvh;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(92, 84, 72, 0.08), rgba(42, 36, 28, 0.28));
+      pointer-events: none;
+    }
+    .wrap {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 18px 40px;
+    }
+    .card {
+      width: min(440px, 100%);
+      background: rgba(247, 243, 236, 0.94);
+      border: 1px solid rgba(255, 250, 244, 0.7);
+      border-radius: 28px;
+      box-shadow: 0 18px 50px rgba(42, 36, 28, 0.16);
+      padding: 36px 32px 28px;
+      text-align: center;
+    }
+    .seal {
+      width: 112px;
+      height: 112px;
+      display: block;
+      margin: 0 auto;
+      object-fit: contain;
+      object-position: center center;
+      background: transparent;
+      opacity: 1;
+    }
+    .eyebrow {
+      margin: 20px 0 0;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--brass);
+      font-weight: 600;
+    }
+    h1 {
+      margin: 12px 0 0;
+      font-weight: 500;
+      font-size: 38px;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      color: var(--pine);
+    }
+    .rule {
+      width: 42px;
+      height: 1px;
+      background: rgba(141, 115, 68, 0.55);
+      margin: 20px auto 0;
+    }
+    .lede {
+      margin: 18px auto 0;
+      max-width: 26ch;
+      font-size: 17px;
+      line-height: 1.55;
+      color: #4a4036;
+    }
+    .ssid {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 22px auto 0;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255, 252, 247, 0.8);
+      border: 1px solid var(--line);
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 14px;
+      line-height: 1.2;
+    }
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #6d8a72;
+    }
+    form { margin-top: 32px; text-align: center; }
+    .dur-label {
+      display: block;
+      margin: 0 0 14px;
+      text-align: center;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      line-height: 1;
+    }
+    .durations { display: flex; gap: 10px; }
+    .durations label {
+      position: relative;
+      flex: 1;
+      margin: 0;
+      text-align: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 12px 8px;
+      background: rgba(255, 252, 247, 0.7);
+      cursor: pointer;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 14px;
+      line-height: 1.2;
+      color: var(--ink);
+    }
+    .durations input { position: absolute; opacity: 0; pointer-events: none; }
+    .durations label:has(input:checked) {
+      background: var(--pine);
+      color: var(--cream);
+      border-color: var(--pine);
+    }
+    button {
+      width: 100%;
+      margin-top: 22px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--pine);
+      color: #f6f1e8;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 15px 16px;
+      cursor: pointer;
+    }
+    .ghost {
+      background: transparent;
+      color: var(--pine);
+      border: 1px solid rgba(36, 48, 40, 0.22);
+      letter-spacing: 0.06em;
+    }
+    .error {
+      margin: 12px 0 0;
+      text-align: center;
+      color: #8c3b32;
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      font-size: 14px;
+    }
+    .fine, .preview-note {
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.5;
+    }
+    .fine { margin: 20px 0 0; text-align: center; }
+    .preview-note {
+      margin-top: 18px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(141, 115, 68, 0.1);
+      text-align: center;
+    }
+    .continue { display: block; text-decoration: none; }
+    .ok {
+      width: 54px;
+      height: 54px;
+      margin: 18px auto 0;
+      border-radius: 50%;
+      border: 1px solid rgba(141, 115, 68, 0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ok span {
+      width: 14px;
+      height: 8px;
+      border-left: 1.5px solid var(--brass);
+      border-bottom: 1.5px solid var(--brass);
+      transform: rotate(-45deg) translate(1px, -1px);
+    }
+    .facts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 18px;
+      text-align: left;
+    }
+    .fact {
+      background: rgba(255, 252, 247, 0.72);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 12px 12px 11px;
+    }
+    .fact b {
+      display: block;
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--brass);
+      margin-bottom: 4px;
+    }
+    .fact span {
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      font-size: 14px;
+      color: var(--ink);
+    }
+    @media (max-width: 420px) {
+      .card { padding: 28px 20px 22px; border-radius: 24px; }
+      h1 { font-size: 36px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <main class="card">
+      <img class="seal" src="/static/seal.png?v=6" alt="">
+      <p class="eyebrow">Palmer Home</p>
+      <h1>{{headline}}</h1>
+      <div class="rule"></div>
+      {{body}}
+    </main>
+  </div>
+</body>
+</html>

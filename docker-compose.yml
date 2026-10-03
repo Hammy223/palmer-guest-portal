@@ -1,0 +1,30 @@
+# PalmerGuest — UniFi 5.1.33 external portal
+# Copy to Unraid, edit the values, then:
+#   docker compose up -d --build
+
+services:
+  palmer-guest-portal:
+    build: .
+    image: palmer-guest-portal:1
+    container_name: palmer-guest-portal
+    restart: unless-stopped
+    ports:
+      # UniFi 5.1 redirects guests to port 80 of the portal IP.
+      # If Unraid already owns port 80, do not use this mapping —
+      # give the container its own LAN IP instead (see README).
+      - "80:8080"
+    environment:
+      UNIFI_URL: "https://192.168.1.1"
+      UNIFI_USER: "portal"
+      UNIFI_PASS: "change-me"
+      UNIFI_SITE: "default"
+      PORTAL_SECRET: "replace-with-a-long-random-string"
+      SSID_NAME: "PalmerGuest"
+      AUTH_MINUTES: "1440"
+      AUTH_MINUTES_MAX: "10080"
+      # Optional per-guest caps in Kbps. Leave blank for unlimited.
+      UP_KBPS: ""
+      DOWN_KBPS: ""
+      LOG_PATH: "/data/access.log"
+    volumes:
+      - ./data:/data
