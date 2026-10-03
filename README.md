@@ -6,12 +6,22 @@ UniFi 5.1 does not host this page. It redirects a guest to this server, and this
 
 ## What the guest sees
 
+The hotspot is open. There is no guest password. A guest picks how long to stay, then Connect.
+
 A self-contained page (no outside fonts or scripts, which captive-portal clients cannot load before they are authorized):
 
 - Palmer Home seal, calm interior
 - SSID `PalmerGuest`
 - 1 day / 3 days / 7 days
 - Connect, then a Palmer Home success page
+
+Landing page:
+
+![Palmer Home landing page](docs/preview-landing.png)
+
+Success page:
+
+![Palmer Home success page](docs/preview-success.png)
 
 ## How UniFi 5.1.33 talks to it
 
@@ -86,10 +96,6 @@ Settings → Wireless Networks → `PalmerGuest`:
 - Apply guest policies / client isolation on, so guests cannot see the house LAN.
 
 Then forget the network on a phone, join `PalmerGuest`, and open any plain `http://` page (or let the captive sheet appear).
-
-## 4. Kitchen card
-
-`kitchen-card.html` is a printable card with the network name. There is no guest password on the page.
 
 ## Optional rate cap
 
